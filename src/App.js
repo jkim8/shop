@@ -1,9 +1,15 @@
-import React from 'react';
+/* eslint-disable */
+import { map } from 'bluebird';
+import React, { useState } from 'react';
 import { Navbar,Nav,NavDropdown,Container, Card, Button } from 'react-bootstrap';
-
 import './App.css';
+import Data from './data.js'
 
 function App() {
+
+  let [shoes, shoes변경] = useState(Data)
+
+
   return (
     <div className="App">
 <Navbar bg="light" expand="lg">
@@ -42,27 +48,29 @@ function App() {
 
 <div className="container">
   <div className="row">
-  <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" alt="" />
-            <h4>상품명</h4>
-            <p>상품정보</p>
-          </div>
-          <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes2.jpg" width="100%" alt="" />
-            <h4>상품명</h4>
-            <p>상품정보</p>
-          </div>
-          <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="100%" alt="" />
-            <h4>상품명</h4>
-            <p>상품정보</p>
-          </div>
+    {
+      shoes.map((a, i)=> {
+        return <Cards shoes={shoes[i]} i={i} key={i}/>
+      })
+    }
+
+
 
   </div>
 </div>
 
     </div>
   );
+}
+
+function Cards(props) {
+  return (
+    <div className="col-md-4">
+      <img src={'https://codingapple1.github.io/shop/shoes'+ (props.i + 1) +'.jpg'} width="100%" alt="" />
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.content } & { props.shoes.price }</p>
+    </div>
+  )
 }
 
 export default App;
