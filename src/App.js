@@ -1,9 +1,11 @@
 /* eslint-disable */
-import { map } from 'bluebird';
 import React, { useState } from 'react';
 import { Navbar,Nav,NavDropdown,Container, Card, Button } from 'react-bootstrap';
 import './App.css';
 import Data from './data.js'
+import Detail from './Detail.js'
+
+import { Link, Route, Switch } from 'react-router-dom'
 
 function App() {
 
@@ -18,8 +20,8 @@ function App() {
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#link">Link</Nav.Link>
+        <Nav.Link><Link to="/" >Home</Link></Nav.Link>
+        <Nav.Link><Link to="/detail" >Detail</Link></Nav.Link>
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -33,31 +35,39 @@ function App() {
 </Navbar>
 
 
-<Card className="background">
-  <Card.Header>20% Season Off</Card.Header>
-  <Card.Body>
-    <Card.Title>Special title treatment</Card.Title>
-    <Card.Text>
-      With supporting text below as a natural lead-in to additional content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>
 
 
 
-<div className="container">
-  <div className="row">
-    {
-      shoes.map((a, i)=> {
-        return <Cards shoes={shoes[i]} i={i} key={i}/>
-      })
-    }
 
 
+<Route exact path="/">
+  <Card className="background">
+    <Card.Header>20% Season Off</Card.Header>
+    <Card.Body>
+      <Card.Title>Special title treatment</Card.Title>
+      <Card.Text>
+        With supporting text below as a natural lead-in to additional content.
+      </Card.Text>
+      <Button variant="primary">Go somewhere</Button>
+    </Card.Body>
+  </Card>
 
-  </div>
+  <div className="container">
+    <div className="row">
+      {
+        shoes.map((a, i)=> {
+          return <Cards shoes={shoes[i]} i={i} key={i}/>
+        })
+      }
+    </div>
 </div>
+</Route>
+<Route path="/detail">
+    <Detail/>
+</Route>
+{/* <Route path="/어쩌구" component={Modal} ></Route> */}
+
+
 
     </div>
   );
@@ -72,5 +82,8 @@ function Cards(props) {
     </div>
   )
 }
+
+
+
 
 export default App;
