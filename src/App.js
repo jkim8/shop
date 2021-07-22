@@ -38,34 +38,41 @@ function App() {
 
 
 
+<Switch>
+  <Route exact path="/">
+    <Card className="background">
+      <Card.Header>20% Season Off</Card.Header>
+      <Card.Body>
+        <Card.Title>Special title treatment</Card.Title>
+        <Card.Text>
+          With supporting text below as a natural lead-in to additional content.
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
+
+    <div className="container">
+      <div className="row">
+        {
+          shoes.map((a, i)=> {
+            return <Cards shoes={shoes[i]} i={i} key={i}/>
+          })
+        }
+      </div>
+  </div>
+  </Route>
+  <Route path="/detail">
+      <Detail/>
+  </Route>
+
+  <Route path="/:id">
+        <div>아무거나 적었을때</div>
+  </Route>
+
+  {/* <Route path="/어쩌구" component={Modal} ></Route> */}
+</Switch>
 
 
-<Route exact path="/">
-  <Card className="background">
-    <Card.Header>20% Season Off</Card.Header>
-    <Card.Body>
-      <Card.Title>Special title treatment</Card.Title>
-      <Card.Text>
-        With supporting text below as a natural lead-in to additional content.
-      </Card.Text>
-      <Button variant="primary">Go somewhere</Button>
-    </Card.Body>
-  </Card>
-
-  <div className="container">
-    <div className="row">
-      {
-        shoes.map((a, i)=> {
-          return <Cards shoes={shoes[i]} i={i} key={i}/>
-        })
-      }
-    </div>
-</div>
-</Route>
-<Route path="/detail">
-    <Detail/>
-</Route>
-{/* <Route path="/어쩌구" component={Modal} ></Route> */}
 
 
 

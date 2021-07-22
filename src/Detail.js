@@ -18,7 +18,7 @@ function Detail() {
             <p>120000원</p>
             <button className="btn btn-danger">주문하기</button> 
             <button className="btn btn-danger" onClick={()=> {
-                history.goBack()
+                history.push('/')
             }}>뒤로가기</button> 
           </div>
         </div>
