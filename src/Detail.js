@@ -74,7 +74,15 @@ function Detail(props) {
             <h4 className="pt-5">{찾은상품.title}</h4>
             <p>{찾은상품.content}</p>
             <p>{찾은상품.price}</p>
-            <button className="btn btn-danger">주문하기</button> 
+
+
+            <Info Stock={props.Stock}/>
+
+
+
+            <button className="btn btn-danger" onClick={ ()=> {
+              props.setStock([9,10,11])
+            } }>주문하기</button> 
             <button className="btn btn-danger" onClick={()=> {
                 history.push('/')
             }}>뒤로가기</button> 
@@ -83,5 +91,14 @@ function Detail(props) {
   </div> 
     )
 }
+
+
+
+const Info = (props) => {
+  return (
+    <p>재고 :{props.Stock[0]} </p>
+  );
+};
+
 
 export default Detail
