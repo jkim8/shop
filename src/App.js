@@ -1,12 +1,13 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { Navbar,Nav,NavDropdown,Container, Card, Button } from 'react-bootstrap';
 import './App.css';
 import Data from './data.js'
 import Detail from './Detail.js'
 import axios from 'axios'
-
 import { Link, Route, Switch } from 'react-router-dom'
+
+let stockContext = React.createContext()
 
 function App() {
 
@@ -54,13 +55,15 @@ function App() {
     </Card>
 
     <div className="container">
-      <div className="row">
-        {
-          shoes.map((a, i)=> {
-            return <Cards shoes={shoes[i]} i={i} key={i}/>
-          })
-        }
-      </div>
+      <stockContext.Provider value={Stock}>
+        <div className="row">
+          {
+            shoes.map((a, i)=> {
+              return <Cards shoes={shoes[i]} i={i} key={i}/>
+            })
+          }
+        </div>
+      </stockContext.Provider>
       <button className="btn btn-primary" onClick={()=> {
 
         axios.post('서버url', { id : '12', pw : 1234})
@@ -106,17 +109,29 @@ function App() {
 }
 
 function Cards(props) {
+
+  let stock = useContext(stockContext)
+
   return (
     <div className="col-md-4">
       <img src={'https://codingapple1.github.io/shop/shoes'+ (props.i + 1) +'.jpg'} width="100%" alt="" />
       <h4>{ props.shoes.title }</h4>
       <p>{ props.shoes.content } & { props.shoes.price }</p>
+      <Test/>
+
     </div>
   )
 }
 
 
 
+
+function Test() {
+
+  let stock = useContext(stockContext)
+
+  return <p>{stock}</p>
+}
 
 
 
