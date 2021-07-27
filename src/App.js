@@ -7,7 +7,7 @@ import Detail from './Detail.js'
 import axios from 'axios'
 import { Link, Route, Switch } from 'react-router-dom'
 
-let stockContext = React.createContext()
+export let stockContext = React.createContext()
 
 function App() {
 
@@ -90,7 +90,9 @@ function App() {
 
 
   <Route path="/detail/:id">
-      <Detail shoes={shoes} Stock={Stock} setStock={setStock}/>
+    <stockContext.Provider value={Stock}>
+        <Detail shoes={shoes} Stock={Stock} setStock={setStock}/>
+    </stockContext.Provider>
   </Route>
 
   <Route path="/:id">

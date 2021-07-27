@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { Nav } from 'react-bootstrap';
 import './Detail.scss'
+import {stockContext} from './App.js'
+import { CSSTransition } from "react-transition-group"
+
+
+
 
 let 박스 = styled.div`
     padding : 20px;
@@ -25,6 +31,12 @@ function Detail(props) {
 
   const [Alert, setAlert] = useState(true)
   const [InputData, setInputData] = useState('')
+  const [Tab, setTab] = useState(0)
+  const [TabSwitch, setTabSwitch] = useState(false)
+
+
+
+  const stock = useContext(stockContext)
 
   useEffect(() => {
     let 타이머 = setTimeout(() => {
@@ -52,6 +64,7 @@ function Detail(props) {
 
         <input onChange={(e)=> {setInputData(e.target.value)}} />
         { InputData }
+        {stock}
 
         {
           Alert === true
@@ -88,9 +101,51 @@ function Detail(props) {
             }}>뒤로가기</button> 
           </div>
         </div>
+
+        <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+          <Nav.Item>
+            <Nav.Link eventKey="link-0" onClick={()=>{ setTabSwitch(false); setTab(0)}} >Active</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link-1" onClick={()=>{ setTabSwitch(false); setTab(1)}} >Option 2</Nav.Link>
+          </Nav.Item>
+
+        </Nav>
+
+     
+        <CSSTransition in={TabSwitch} classNames="wow" timeout={500}>
+          <TabContent Tab={Tab} setTabSwitch={setTabSwitch}/>
+        </CSSTransition>
+
+
+
+
+
+
   </div> 
     )
 }
+
+
+
+function TabContent(props){
+
+  useEffect(()=> {
+    props.setTabSwitch(true)
+  })
+
+ if (props.Tab === 0) {
+  return <div>0번째 내용입니</div>
+ } else if (props.Tab === 1) {
+  return <div>1번째 내용입니</div>
+ } else if (props.Tab === 2) {
+  return <div>2번째 내용입니</div>
+ }
+
+}
+
+
+
 
 
 
