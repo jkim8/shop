@@ -15,15 +15,38 @@ const Cart = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>{props.state[0].name}</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                </tr>
+                    {
+                        props.state.map((a,i)=> {
+                            return (
+                                <tr key={a.id}>
+                                    <td>{a.id}</td>
+                                    <td>{a.name}</td>
+                                    <td>{a.qty}</td>
+                                    <td>
+                                        <button onClick={()=> { props.dispatch({type : '수량증가'}) }} >+</button>
+                                        <button onClick={()=> { props.dispatch({type : '수량감소'}) }} >-</button>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+
     
                 </tbody>
             </Table>
+            {
+                props.isOpenAlert === true 
+                ? (
+                    <div className="my-alert2" >
+                        <p>지금 구매하시면 신규 20%할인</p>
+                        <button onClick={()=>{props.dispatch({type : 'alertClose'})} } >닫기</button>
+                    </div>
+                )
+                : null
+
+            }
+
+
         </div>
     );
 };
@@ -32,7 +55,8 @@ const Cart = (props) => {
 
 function 함수명(state){
     return {
-        state: state
+        state: state.reducer,
+        isOpenAlert : state.reducer2
     }
 }
 
