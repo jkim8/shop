@@ -54,7 +54,7 @@ function Detail(props) {
     let { id } = useParams()
     let history = useHistory()
     let 찾은상품 = props.shoes.find(function(상품){
-        return 상품.id === parseInt(id)
+        return 상품.id == id
       });
 
     return (
@@ -98,7 +98,7 @@ function Detail(props) {
               props.setStock([9,10,11])
 
 
-              props.dispatch({type : '항목추가', payload : {id: 2, name: '새로운상품, qty: 300'}})
+              props.dispatch({type : '항목추가', 데이터 : {id: 찾은상품.id, name: 찾은상품.title, qty: 1 }  })
               history.push('/cart')
 
             } }>주문하기</button> 

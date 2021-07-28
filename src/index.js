@@ -28,28 +28,34 @@ const defaultValue = [
 
 function reducer (state = defaultValue, action ) {
   if (action.type === '항목추가') {
-    const copy = [...state]
-    copy.push(action.payload)
-    return copy
-  }
-  else if ( action.type === '수량증가' ){
+    let found = state.findIndex((a)=> {return a.id === action.데이터.id })
+
+    if ( found >= 0 ) {
+      let copy = [...state]
+      copy[found].qty++
+      return copy
+    
+    } else {
+      const copy = [...state]
+      copy.push(action.데이터)
+      return copy
+    }
+
+
+  } else if ( action.type === '수량증가' ){
     // action.payload 로 값을 받을 수 있음 
 
-
-
-    
-
     const copy = [...state]
-    copy[0].qty++
+    copy[action.payload].qty++
     return  copy
 
   } else if (action.type === '수량감소'){
 
     const copy = [...state]
-    if (copy[0].qty > 0) {
-      copy[0].qty-- 
+    if (copy[action.payload].qty > 0) {
+      copy[action.payload].qty-- 
     } else {
-      copy[0].qty = 0
+      copy[action.payload].qty = 0
     }
     return copy
 
