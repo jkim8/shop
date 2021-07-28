@@ -5,6 +5,7 @@ import { Nav } from 'react-bootstrap';
 import './Detail.scss'
 import {stockContext} from './App.js'
 import { CSSTransition } from "react-transition-group"
+import { connect } from 'react-redux'; //해야함 스테이스 쓰려면
 
 
 
@@ -95,6 +96,11 @@ function Detail(props) {
 
             <button className="btn btn-danger" onClick={ ()=> {
               props.setStock([9,10,11])
+
+
+              props.dispatch({type : '항목추가', payload : {id: 2, name: '새로운상품, qty: 300'}})
+              history.push('/cart')
+
             } }>주문하기</button> 
             <button className="btn btn-danger" onClick={()=> {
                 history.push('/')
@@ -156,4 +162,16 @@ const Info = (props) => {
 };
 
 
-export default Detail
+
+
+function state를props화(state){
+  return {
+      state: state.reducer,
+      isOpenAlert : state.reducer2
+  }
+}
+
+
+export default connect(state를props화)(Detail);
+
+

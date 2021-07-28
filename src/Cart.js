@@ -23,7 +23,7 @@ const Cart = (props) => {
                                     <td>{a.name}</td>
                                     <td>{a.qty}</td>
                                     <td>
-                                        <button onClick={()=> { props.dispatch({type : '수량증가'}) }} >+</button>
+                                        <button onClick={()=> { props.dispatch({type : '수량증가', payload : {name : 'kim'}}) }} >+</button>
                                         <button onClick={()=> { props.dispatch({type : '수량감소'}) }} >-</button>
                                     </td>
                                 </tr>
@@ -53,7 +53,7 @@ const Cart = (props) => {
 
 
 
-function 함수명(state){
+function state를props화(state){
     return {
         state: state.reducer,
         isOpenAlert : state.reducer2
@@ -61,4 +61,4 @@ function 함수명(state){
 }
 
 
-export default connect(함수명)(Cart);
+export default connect(state를props화)(Cart);

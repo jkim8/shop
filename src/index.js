@@ -9,16 +9,17 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore } from 'redux';
 
+//reducer 만드는 세트 
+const alertDefault = true //default 값을 하나 만듬 
 
-const alertDefault = true
-
-function reducer2(state = alertDefault, action) {
-  if (action.type === 'alertClose') {
+function reducer2(state = alertDefault, action) { //reducer를 만든다 
+  if (action.type === 'alertClose') { //액션 조건문을 만듬
     return state = false
   } else {
     return true
   }
 }
+//여기까지 
 
 const defaultValue = [
   {id: 0, name : "멋진신발" ,qty : 2},
@@ -26,14 +27,24 @@ const defaultValue = [
 ]
 
 function reducer (state = defaultValue, action ) {
+  if (action.type === '항목추가') {
+    const copy = [...state]
+    copy.push(action.payload)
+    return copy
+  }
+  else if ( action.type === '수량증가' ){
+    // action.payload 로 값을 받을 수 있음 
 
-  if ( action.type === '수량증가' ){
+
+
+    
 
     const copy = [...state]
     copy[0].qty++
     return  copy
 
   } else if (action.type === '수량감소'){
+
     const copy = [...state]
     if (copy[0].qty > 0) {
       copy[0].qty-- 
