@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap'
 import { connect } from 'react-redux';
 
 const Cart = (props) => {
+    
     return (
         <div>
             <Table responsive>

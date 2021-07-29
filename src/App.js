@@ -1,12 +1,16 @@
 /* eslint-disable */
-import React, { Component, useContext, useState } from 'react';
+import React, { useContext, useState, lazy, Suspense } from 'react';
 import { Navbar,Nav,NavDropdown,Container, Card, Button } from 'react-bootstrap';
 import './App.css';
 import Data from './data.js'
-import Detail from './Detail.js'
+// import Detail from './Detail.js'
+let Detail = lazy(()=> { return import('./Detail.js')})  //es6 dynamic 문법
 import Cart from './Cart.js'
 import axios from 'axios'
 import { Link, Route, Switch, useHistory } from 'react-router-dom'
+
+
+
 
 export let stockContext = React.createContext()
 
@@ -85,7 +89,9 @@ function App() {
   </Route>
   <Route path="/detail/:id">
     <stockContext.Provider value={Stock}>
-        <Detail shoes={shoes} Stock={Stock} setStock={setStock}/>
+      <Suspense fallback={<div>로딩중입니다.</div>}>
+      <Detail shoes={shoes} Stock={Stock} setStock={setStock}/>
+      </Suspense>
     </stockContext.Provider>
   </Route>
 
