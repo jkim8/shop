@@ -37,6 +37,10 @@ function Detail(props) {
 
 
 
+
+
+
+
   const stock = useContext(stockContext)
 
   useEffect(() => {
@@ -56,6 +60,27 @@ function Detail(props) {
     let 찾은상품 = props.shoes.find(function(상품){
         return 상품.id == id
       });
+
+
+
+
+
+      
+useEffect( ()=>{
+  var arr = localStorage.getItem('watched');
+  arr = JSON.parse(arr);
+  
+  arr.push(id);
+  arr = new Set(arr);
+  arr = [...arr];
+  localStorage.setItem('watched', JSON.stringify(arr) );
+
+}, [] );
+
+
+
+
+  
 
     return (
         <div className="container">
